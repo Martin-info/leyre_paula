@@ -3,6 +3,14 @@ def init_board():
     global board
     board=[0]*9
 
+
+def is_over():
+  return (possible_moves()==[] or end_game())
+
+# Compute the score
+def scoring():
+    return -100 if loss_condition() else 0
+
 def possible_moves():
     global board
     return [a+1 for a,b in enumerate(board) if b==0] 
