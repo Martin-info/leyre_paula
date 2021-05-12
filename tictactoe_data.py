@@ -44,4 +44,22 @@ def end_game():
             out=(-1,0) # -1 =  playing
             break
         
-    return  out     
+    return  out    
+
+
+#################################################################################################
+## Funcion recursiva: (funcion que se llama a si misma) ########################################
+
+def Negamax(board,depth,alpha=-inf, beta=+inf):
+
+    # caso base: (caso que marca el fin de la recursividad)
+    # En este caso es que hay un ganador o el tablero esta lleno
+ 
+    if is_over(): # si la partida ha terminado
+        score = scoring() # valoro el resultado final (derrota o empate)
+
+        if score == 0:
+            return (score,None) 
+        else: 
+            return  ((score - 0.01*depth*abs(score)/score),None) # valoro la progundida para busjar victorias
+                                                                 # rapidas o derrotas lentas. 
