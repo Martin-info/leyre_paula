@@ -9,7 +9,7 @@ def is_over():
 
 # Compute the score
 def scoring():
-    return -100 if loss_condition() else 0
+    return -100 if end_game() else 0
 
 def possible_moves():
     global board
