@@ -1,7 +1,11 @@
+import random
 
 def init_board():
-    global board
+    global board, nplayer,nopponent,inf
     board=[0]*9
+    nplayer = 1
+    nopponent = 2
+    inf = float('infinity')
 
 
 def is_over():
@@ -51,7 +55,22 @@ def desordenar_casillas(l2):
     l1.extend(l2)
     random.shuffle(l1)
     return l1
-    
+
+# Make a move
+def make_move(move):
+    board[int(move) - 1] = nplayer
+
+
+# Undo a move
+def undo_move(move):
+    board[int(move) - 1] = 0
+
+def switch_player():
+   global nplayer, nopponent
+   aux=nplayer
+   nplayer=nopponent
+   nopponent=aux
+
 #################################################################################################
 ## Funcion recursiva: (funcion que se llama a si misma) ########################################
 
