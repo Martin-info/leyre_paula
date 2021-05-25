@@ -7,7 +7,7 @@ import sys
 
 nplayer = 1
 nopponent = 2
-board = [0] * 1
+board = [0] * 16
 inf = float('infinity')
 
 
@@ -88,8 +88,8 @@ def Negamax(board,depth,alpha=-inf, beta=+inf):
     # En la primer jugada,elegimos la casilla de forma aleatoria para que el juego sea mas variado. 
     # Si no el ordenador empezaria siempre de la misma forma.
 
-    if len(possible_moves())==9:
-        return (None,random.randint(1,9))
+    if len(possible_moves())==16:
+        return (None,random.randint(1,16))
 
 
     bestValue = -inf
@@ -123,7 +123,7 @@ def Negamax(board,depth,alpha=-inf, beta=+inf):
 
 def init_board():
     global board, nplayer,nopponent,inf
-    board=[0]*9
+    board=[0]*16
     nplayer = 1
     nopponent = 2
     inf = float('infinity')
@@ -217,37 +217,38 @@ def drawXO():
 def cross_lines(line):
       
     # horizontal lines
-    if line==1 or line==2 or line==3:     
+    if line==1 or line==2 or line==3 or line==4:     
+        
         pygame.draw.line(gameDisplay, (250, 0, 0), 
-                    (0+10, (line)*height / 3 -height / 6), 
-                    (width -10, (line)*height / 3 - height / 6 ), 14)  
+                    (0+10, (line)*height /4 -height / 8), 
+                    (width -10, (line)*height / 4 - height / 8 ), 14)  
     
     # vertical lines
-    elif line==4 or line==5 or line==6:          
+    elif line==5 or line==6 or line==7 or line==8:          
         pygame.draw.line (gameDisplay, (250, 0, 0),
-                     ((line-3)* width / 3 - width / 6, 0+10),
-                     ((line-3)* width / 3 - width / 6, height -10), 14) 
+                     ((line-4)* width / 4 - width / 8, 0+10),
+                     ((line-4)* width / 4 - width / 8, height -10), 14) 
     
     # diagonal line left to right
-    elif line==7:                             
-        pygame.draw.line (gameDisplay, (250, 70, 70), (50, 50), (350, 350), 14) 
+    elif line==9:                             
+        pygame.draw.line (gameDisplay, (250, 70, 70), (50, 50), (500, 500), 14) 
     
     # diagonal line right to left
-    elif line==8:                             
-        pygame.draw.line (gameDisplay, (250, 70, 70), (350, 50), (50, 350), 14)
+    elif line==10:                            
+        pygame.draw.line (gameDisplay, (250, 70, 70), (480, 50), (50, 480), 14)
     
     pygame.display.update()
 
 
 
 def end_game():
-    possible_combinations=[[1,2,3],[4,5,6],[7,8,9],
-                           [1,4,7],[2,5,8],[3,6,9],
-                           [1,5,9],[3,5,7]]
+    possible_combinations=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16],
+                           [1,5,9,13],[2,6,10,14],[3,7,11,15],[4,8,12,16],
+                           [1,6,11,16],[4,7,10,13]]
     for p in [1,2]:
         for c,combination in enumerate(possible_combinations):
-           three=all([(board[i-1]==p) for i in combination])
-           if three:
+           four=all([(board[i-1]==p) for i in combination])
+           if four:
               return cross_lines(c+1)
 
 ###################################################################################
@@ -315,7 +316,7 @@ while True:
             while move<1:                     # mostramos el tablero 
                 move=check_events()            # el usuario elige jugada
 
-#            turn=2                       # cambio de turno
+            turn=2                       # cambio de turno
         else:                            # sino, juega el ordenador
             score,move=Negamax(board,0)  # ordenador elige jugada
             turn=1                       # cambiamos de turno
