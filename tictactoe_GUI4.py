@@ -308,7 +308,7 @@ draw_board()
 
 
 while True:
-    turn=1 #random.randint(0,1)             # turno aleatorio  
+    turn= 1  #random.randint(0,1)             # turno aleatorio  
     while not is_over():                 # mientras no termine el juego.
     
         if turn==1:                      # Si turno =1 juega el usuario
@@ -344,4 +344,4 @@ while True:
 
     while check_events()!=-2:
         pass
-
+# este es el ultimo 2021/05/26
